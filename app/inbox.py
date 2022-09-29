@@ -1,3 +1,4 @@
+from email import message
 from flask import (
     Blueprint, flash, g, redirect, render_template, request, url_for, current_app, send_file
 )
@@ -16,12 +17,12 @@ def getDB():
 @bp.route('/show')
 @login_required
 def show():
-    db = ?
+    db = get_db()
     messages = db.execute(
-        QUERY
+        'SELECT * FROM message'
     ).fetchall()
 
-    return render_template(TEMP, messages=messages)
+    return render_template(show.html, messages=messages)
 
 
 @bp.route('/send', methods=('GET', 'POST'))
@@ -29,11 +30,11 @@ def show():
 def send():
     if request.method == 'POST':        
         from_id = g.user['id']
-        to_username = ?
-        subject = ?
-        body = ?
+        to_username = g.user['username']
+        subject = g.user['subject']
+        body = g.user['body']
 
-        db = ?
+        db = get_db()
        
         if not to_username:
             flash('To field is required')
