@@ -1,5 +1,5 @@
 import os
-from . import dbc
+from . import db
 
 from flask import Flask
 
@@ -24,7 +24,7 @@ def create_app(test_config=None):
     except OSError:
         pass
 
-    from . import db
+    from . import dbc
     db.init_app(app)
     
     from . import auth
