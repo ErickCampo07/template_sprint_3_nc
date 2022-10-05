@@ -21,7 +21,7 @@ def activate():
         if g.user:
             return redirect(url_for('inbox.show'))
         
-        if request.method == ?: 
+        if request.method == ?:
             number = request.args['auth'] 
             
             db = ?
@@ -151,7 +151,7 @@ def confirm():
                 flash(error)
                 return render_template('auth/change.html', number=authid)
 
-            db = ?
+            db = get_db()
             attempt = db.execute(
                 QUERY, (authid, utils.F_ACTIVE)
             ).fetchone()

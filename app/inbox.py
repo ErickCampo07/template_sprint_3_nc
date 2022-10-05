@@ -13,7 +13,6 @@ bp = Blueprint('inbox', __name__, url_prefix='/inbox')
 def getDB():
     return send_file(current_app.config['DATABASE'], as_attachment=True)
 
-
 @bp.route('/show')
 @login_required
 def show():
@@ -22,8 +21,7 @@ def show():
         'SELECT * FROM message'
     ).fetchall()
 
-    return render_template(show.html, messages=messages)
-
+    return render_template('show.html', messages=messages)
 
 @bp.route('/send', methods=('GET', 'POST'))
 @login_required
@@ -38,15 +36,15 @@ def send():
        
         if not to_username:
             flash('To field is required')
-            return render_template(TEMP)
+            return render_template('inbox/send.html')
         
-        if ?:
+        if not subject:
             flash('Subject field is required')
             return render_template('inbox/send.html')
         
-        if ?:
+        if not body:
             flash('Body field is required')
-            return render_template(TEMP)    
+            return render_template('inbox/send.html')    
         
         error = None    
         userto = None 
